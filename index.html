@@ -5,44 +5,66 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css@1.12/mvp.css"> 
     <title>Firebase JS</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" href="index.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </head>
 
 <body>
-    <div class="main">
-        <div>
-            <label>Email</label>
-            <input name="email" placeholder="Email" id="email" type="email" />
-        </div>
-        <div>
-            <label>Password</label>
-            <input name="password" placeholder="Password" id="password" type="password" />
-        </div>
-
-        <!-- <button 
-        class="submit-btn"
-        onclick="register()"
-        >Sign Up</button>
-
-        <button 
-        class="login-btn"
-        onclick="login()"
-        >Sign In</button> -->
-    </div>
-
-    <button onclick="saveData()">Save Data</button>
-
-    <button onclick="readData()">Read Data</button>
-
-    <button onclick="updateData()">Update one Field</button>
-
-    <button onclick="deleteData()">Delete one Field</button>
+    <main>
+        <header>
+            <nav>
+                <h1>Firebase Workshop</h1>
+            </nav>
+        </header>
+        <section style="display: flex; flex-direction: column;">
+            <h1>1. Authentication</h1>
+            <form id="form">
+                <div>
+                    <label>Email</label>
+                    <input name="email" placeholder="Email" id="email" type="email" />
+                </div>
+                <div>
+                    <label>Password</label>
+                    <input name="password" placeholder="Password" id="password" type="password" />
+                </div>
+                <div>
+                    <button 
+                        type="text"
+                        id="register-btn"
+                        >Sign Up</button>
+    
+                    <button 
+                        type="text"
+                        id="login-btn"
+                        >Sign In</button>
+                </div>
+            </form>
+        </section>
+        
+    </main>
 </body>
+<script type="module" src="./firebase.js"></script>
+<script type="module" src="./index.js"></script>
+<script type="module">
+    import { app, auth, handleLogin, handleRegister } from './firebase.js'
 
-<script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
-<script src="index.js"></script>
+    document.getElementById("form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        console.log(email, password);
+    })
+    document.getElementById("register-btn").addEventListener("click", (e) => {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        handleRegister(email, password);
+    });
+    document.getElementById("login-btn").addEventListener("click", (e) => {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        handleLogin(email, password);
+    })
+</script>
 
 </html>
