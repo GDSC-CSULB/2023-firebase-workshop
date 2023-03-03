@@ -2,7 +2,7 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js'
 
 // Add Firebase products that you want to use
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut  } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js'
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, setPersistence, browserSessionPersistence  } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js'
 // import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js'
 
 // Your web app's Firebase configuration
@@ -53,6 +53,24 @@ function fireSuccess(text){
     onClick: function(){} // Callback after click
     }).showToast(); 
 }
+
+export function stickyLogin(){
+    setPersistence(auth, browserSessionPersistence)
+    .then(() => {
+      // Existing and future Auth states are now persisted in the current
+      // session only. Closing the window would clear any existing state even
+      // if a user forgets to sign out.
+      // ...
+      // New sign-in will be persisted with session persistence.
+      return signInWithEmailAndPassword(auth, email, password);
+    })
+    .catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+    });
+}
+
 
 export const handleSignOut = () => {
     signOut(auth).then(() => {
