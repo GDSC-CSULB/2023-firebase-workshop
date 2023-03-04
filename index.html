@@ -47,10 +47,10 @@
     </main>
 </body>
 <script type="module" src="./firebase.js"></script>
-<script type="module" src="./index.js"></script>
+<script type="module" src="./frontend.js"></script>
 <script type="module">
     import { app, auth, handleLogin, handleRegister } from './firebase.js'
-
+    import { renderLoggedInPage, renderLoggedOutPage  } from './frontend.js'
     document.getElementById("form").addEventListener("submit", (e) => {
         e.preventDefault();
         console.log(email, password);
