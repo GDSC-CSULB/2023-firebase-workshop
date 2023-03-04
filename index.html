@@ -17,10 +17,13 @@
         <header>
             <nav>
                 <h1>Firebase Workshop</h1>
+                <button style="display: none;" id="logout-btn">Logout</button>
             </nav>
         </header>
-        <section style="display: flex; flex-direction: column;">
-            <h1>1. Authentication</h1>
+
+        <!-- Unauthenticated section starts -->
+        <section id="unauthenticated-section" style="display: flex; flex-direction: column;">
+            <h1>Unauthenticated</h1>
             <form id="form">
                 <div>
                     <label>Email</label>
@@ -43,18 +46,30 @@
                 </div>
             </form>
         </section>
-        
+        <!-- Unauthenticated section starts -->
+
+        <!-- Authenticated section starts -->
+        <section id="authenticated-section" style="display: none; flex-direction: column;">
+            <h1>✅ You are Logged In</h1>
+        </section>
+        <!-- Authenticated section starts -->
+
     </main>
 </body>
 <script type="module" src="./firebase.js"></script>
 <script type="module" src="./frontend.js"></script>
 <script type="module">
-    import { app, auth, handleLogin, handleRegister } from './firebase.js'
-    import { renderLoggedInPage, renderLoggedOutPage  } from './frontend.js'
+
+    import { app, auth, handleLogin, handleRegister, handleSignOut } from './firebase.js';
+    import { renderLoggedInPage, renderLoggedOutPage } from './frontend.js';
+    
+    // EventListeners
     document.getElementById("form").addEventListener("submit", (e) => {
         e.preventDefault();
-        console.log(email, password);
-    })
+    });
+    document.getElementById("logout-btn").addEventListener("click", (e) => {
+        handleSignOut();
+    });
     document.getElementById("register-btn").addEventListener("click", (e) => {
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
@@ -64,7 +79,17 @@
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
         handleLogin(email, password);
-    })
+    });
+
+    // Check auth states
+    auth.onAuthStateChanged(function(user) {
+        if (user) {
+            // User is signed in.
+            renderLoggedInPage();
+        } else {
+            renderLoggedOutPage();
+        }
+    });
 </script>
 
 </html>
