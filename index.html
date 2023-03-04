@@ -23,8 +23,8 @@
 
         <!-- Unauthenticated section starts -->
         <section id="unauthenticated-section" style="display: flex; flex-direction: column;">
-            <h1>Unauthenticated</h1>
-            <form id="form">
+            <form>
+                <h1>Create Account</h1>
                 <div>
                     <label>Email</label>
                     <input name="email" placeholder="Email" id="email" type="email" />
@@ -36,13 +36,26 @@
                 <div>
                     <button 
                         type="text"
-                        id="register-btn"
+                        id="signup-btn"
                         >Sign Up</button>
-    
+                </div>
+            </form>
+            <form>
+                <h1>Login</h1>
+                <div>
+                    <label>Email</label>
+                    <input name="email" placeholder="Email" id="email" type="email" />
+                </div>
+                <div>
+                    <label>Password</label>
+                    <input name="password" placeholder="Password" id="password" type="password" />
+                </div>
+                <div>
                     <button 
                         type="text"
                         id="login-btn"
-                        >Sign In</button>
+                        >Log In
+                    </button>
                 </div>
             </form>
         </section>
@@ -63,13 +76,15 @@
     import { renderLoggedInPage, renderLoggedOutPage } from './frontend.js';
     
     // EventListeners
-    document.getElementById("form").addEventListener("submit", (e) => {
-        e.preventDefault();
-    });
+    Array.from(document.getElementsByTagName("form")).forEach(el => {
+        el.addEventListener("submit", (e) => {
+            e.preventDefault();
+        });
+    })
     document.getElementById("logout-btn").addEventListener("click", (e) => {
         handleSignOut();
     });
-    document.getElementById("register-btn").addEventListener("click", (e) => {
+    document.getElementById("signup-btn").addEventListener("click", (e) => {
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
         handleRegister(email, password);
