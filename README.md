@@ -1,6 +1,6 @@
 # 2023 GDSC Firebase Workshop
 
-## Frontend
+## Frontend Libraries
 - [MVP CSS](https://andybrewer.github.io/mvp/)
 - [Toastify](https://apvarun.github.io/toastify-js/)
 
