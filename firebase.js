@@ -2,8 +2,8 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js'
 
 // Add Firebase products that you want to use
+// Use this link: https://firebase.google.com/docs/auth/web/password-auth
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js'
-// import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js'
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -19,78 +19,12 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth();
 
-// Frontend
-const fireError = (text) => {
-    Toastify({
-    text,
-    duration: 3000,
-    destination: "https://github.com/apvarun/toastify-js",
-    newWindow: true,
-    close: true,
-    gravity: "top", // `top` or `bottom`
-    position: "left", // `left`, `center` or `right`
-    stopOnFocus: true, // Prevents dismissing of toast on hover
-    style: {
-        background: "rgb(220 38 38)",
-    },
-    onClick: function(){} // Callback after click
-    }).showToast(); 
-}
-
-const fireSuccess = (text) => {
-    Toastify({
-    text,
-    duration: 3000,
-    destination: "https://github.com/apvarun/toastify-js",
-    newWindow: true,
-    close: true,
-    gravity: "top", // `top` or `bottom`
-    position: "left", // `left`, `center` or `right`
-    stopOnFocus: true, // Prevents dismissing of toast on hover
-    style: {
-        background: "rgb(22 163 74)",
-    },
-    onClick: function(){} // Callback after click
-    }).showToast(); 
-}
-
 export const handleSignOut = () => {
-    signOut(auth).then(() => {
-        // Re-draw the page
-        fireError("See you next time!");
-    }).catch((error) => {
-        fireError(error);
-    });
-}
 
-export const handleLogin = (email, password) => {
-    signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
-            if(user)fireSuccess("You are successfully logged in!");
-            // ...
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            fireError(`${errorCode}: ${errorMessage}`);
-            // ..
-        });
 };
-
+export const handleLogin = (email, password) => {
+    
+};
 export const handleRegister = (email, password) => {
-    createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
-            if(user)fireSuccess("You are successfully signed up!");
-            // ...
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            fireError(`${errorCode}: ${errorMessage}`);
-            // ..
-        });
+    
 };

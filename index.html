@@ -59,37 +59,9 @@
 <script type="module" src="./firebase.js"></script>
 <script type="module" src="./frontend.js"></script>
 <script type="module">
-
     import { app, auth, handleLogin, handleRegister, handleSignOut } from './firebase.js';
-    import { renderLoggedInPage, renderLoggedOutPage } from './frontend.js';
+    import { renderLoggedInPage, renderLoggedOutPage, toastError, toastSuccess } from './frontend.js';
     
-    // EventListeners
-    document.getElementById("form").addEventListener("submit", (e) => {
-        e.preventDefault();
-    });
-    document.getElementById("logout-btn").addEventListener("click", (e) => {
-        handleSignOut();
-    });
-    document.getElementById("register-btn").addEventListener("click", (e) => {
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        handleRegister(email, password);
-    });
-    document.getElementById("login-btn").addEventListener("click", (e) => {
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        handleLogin(email, password);
-    });
-
-    // Check auth states
-    auth.onAuthStateChanged(function(user) {
-        if (user) {
-            // User is signed in.
-            renderLoggedInPage();
-        } else {
-            renderLoggedOutPage();
-        }
-    });
 </script>
 
 </html>
