@@ -26,7 +26,7 @@ export const toastError = (text) => {
     },
     onClick: function(){} // Callback after click
     }).showToast(); 
-}
+};
 
 export const toastSuccess = (text) => {
     Toastify({
